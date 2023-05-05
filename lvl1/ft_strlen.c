@@ -8,8 +8,8 @@ int ft_strlen(char *str)
 	return count;
 }
 
-int	main(void)
+/* int	main(void)
 {
 	ft_strlen("Hello");
 	return (0);
-}
+} */
