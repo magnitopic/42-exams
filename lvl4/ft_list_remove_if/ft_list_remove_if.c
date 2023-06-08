@@ -4,10 +4,10 @@
 
 void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
-	t_list *aux;
+	t_list	*aux;
 
 	if (begin_list == NULL || data_ref == NULL)
-		return;
+		return ;
 	aux = *begin_list;
 	while (aux)
 	{
@@ -15,7 +15,6 @@ void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 			free(aux->data);
 		aux = aux->next;
 	}
-
 }
 
 #include <stdio.h>
