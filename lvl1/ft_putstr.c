@@ -2,15 +2,16 @@
 
 void ft_putstr(char *str)
 {
-	int i = 0;
-
-	while (str[i])
-		write(1, &str[i++], 1);
+	while (*str)
+	{
+		write(1, str, 1);
+		str++;
+	}
 }
 
-/* int	main()
+int main(void)
 {
-	ft_putstr("Yes");
+	char str[13] = "Hello there\n";
+	ft_putstr(str);
 	return (0);
 }
- */

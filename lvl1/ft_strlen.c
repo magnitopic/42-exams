@@ -1,15 +1,17 @@
-#include <unistd.h>
+#include <stdio.h>
 
 int ft_strlen(char *str)
 {
 	int count = 0;
+
 	while (str[count])
 		count++;
-	return count;
+	return (count);
 }
 
-/* int	main(void)
+int main(void)
 {
-	ft_strlen("Hello");
+	char str[13] = "Hello There\n";
+	printf("%d\n", ft_strlen(str));
 	return (0);
-} */
+}
