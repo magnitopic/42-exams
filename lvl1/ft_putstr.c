@@ -11,7 +11,7 @@ void ft_putstr(char *str)
 
 int main(void)
 {
-	char str[13] = "Hello there\n";
-	ft_putstr(str);
-	return (0);
+	ft_putstr("Hello There. General Kenobi\n");
+	return 0;
 }
+
