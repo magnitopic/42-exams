@@ -1,5 +1,6 @@
 #include "get_next_line.h"
 #include <stdio.h>
+#include <fcntl.h>
 
 char	*get_next_line(int fd)
 {
@@ -22,9 +23,18 @@ char	*get_next_line(int fd)
 	return (buffer);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
-	printf("%s\n", get_next_line(0));
+	if (argc == 2)
+	{
+		int fd = open(argv[1], O_RDONLY);
+		char *a = get_next_line(fd);
+		while (a != NULL)
+		{
+			printf("%s", a);
+			a =  get_next_line(fd);
+		}
+	}
 	return (0);
 }
 
