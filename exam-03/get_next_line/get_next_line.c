@@ -1,40 +1,47 @@
 #include "get_next_line.h"
-#include <stdio.h>
 #include <fcntl.h>
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
 	int i = 0;
-	int rd = 0;
+	int rd;
 	char character;
 	char *buffer = malloc(1000000);
 
-	if (BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE < 1)
+	{
+		free(buffer);
 		return (NULL);
-	while ((rd = read(fd, &character, BUFFER_SIZE - BUFFER_SIZE + 1)) > 0)
+	}
+	while ((rd =read(fd, &character, BUFFER_SIZE - BUFFER_SIZE + 1))  > 0)
 	{
 		buffer[i++] = character;
 		if (character == '\n')
 			break ;
 	}
 	buffer[i] = '\0';
-	if (rd == -1 || i == 0 || (!buffer[i - 1] && !rd))
-			return (free(buffer), NULL);
-	return (buffer);
+	if (i == 0)
+		return (free(buffer), NULL);
+	return buffer;
 }
 
-int main(int argc, char **argv)
+int main (void)
 {
-	if (argc == 2)
+	int fd =open ("get_next_line.h", O_RDONLY);
+	char *test = get_next_line(fd);
+	while (test)
 	{
-		int fd = open(argv[1], O_RDONLY);
-		char *a = get_next_line(fd);
-		while (a != NULL)
-		{
-			printf("%s", a);
-			a =  get_next_line(fd);
-		}
+		printf("%s", test);
+		test = get_next_line(fd);
 	}
+	printf("%s",get_next_line(fd));
+	printf("%s",get_next_line(fd));
+	printf("%s",get_next_line(fd));
+	printf("%s",get_next_line(fd));
+	printf("%s",get_next_line(fd));
+	printf("%s",get_next_line(fd));
+	printf("%s",get_next_line(fd));
+	printf("%s",get_next_line(fd));
+	printf("%s",get_next_line(fd));
 	return (0);
 }
-
