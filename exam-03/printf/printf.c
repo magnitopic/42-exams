@@ -1,27 +1,26 @@
 #include <stdarg.h>
 #include <unistd.h>
-#include <stdio.h>
 
 void put_str(char *str, int *len)
 {
 	if (!str)
-		str = "(NULL)";
+		str = "(null)";
 	while (*str)
 		*len += write(1, str++, 1);
 }
 
 void put_num(long long int num, int base, int *len)
 {
-	char *hex= "0123456789abcdef";
-	
+	char *hex = "0123456789abcdef";
+
 	if (num < 0)
 	{
 		num *= -1;
-		*len += write(1, "-", 1);
+		len += write(1, "-", 1);
 	}
 	if (num >= base)
-		put_num((num / base), base, len);
-	*len += write(1, &hex[num % base], 1);
+		put_num(num / base, base, len);
+	write(1, &hex[num % base], 1);
 }
 
 int ft_printf(const char *str, ...)
@@ -30,9 +29,9 @@ int ft_printf(const char *str, ...)
 	int len = 0;
 
 	va_start(args, str);
-	while (*str)
+	while(*str)
 	{
-		if (*str == '%' && (*(str + 1) == 's' || *(str + 1) == 'd' || *(str +1) == 'x'))
+		if (*str == '%' && (*(str + 1) == 's' || *(str + 1) == 'd' || *(str + 1) == 'x'))
 		{
 			str++;
 			if (*str == 's')
@@ -49,6 +48,7 @@ int ft_printf(const char *str, ...)
 	return (va_end(args), len);
 }
 
+#include <stdio.h>
 
 int main(void)
 {
