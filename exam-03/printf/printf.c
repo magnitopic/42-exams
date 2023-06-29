@@ -47,11 +47,3 @@ int ft_printf(const char *str, ...)
 	}
 	return (va_end(args), len);
 }
-
-#include <stdio.h>
-
-int main(void)
-{
-	printf(" - %d\n", printf("Hello%s %d %d %x", " There", -42, -89, 6463));
-	printf(" - %d\n", ft_printf("Hello%s %d %d %x", " There", -42, -89, 6463));
-}
