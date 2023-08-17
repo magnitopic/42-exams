@@ -16,11 +16,11 @@ void put_num(long long int num, int base, int *len)
 	if (num < 0)
 	{
 		num *= -1;
-		len += write(1, "-", 1);
+		*len += write(1, "-", 1);
 	}
 	if (num >= base)
 		put_num(num / base, base, len);
-	write(1, &hex[num % base], 1);
+	*len += write(1, &hex[num % base], 1);
 }
 
 int ft_printf(const char *str, ...)
