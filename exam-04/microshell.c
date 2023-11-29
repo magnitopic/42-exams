@@ -36,7 +36,7 @@ int exec(char **argv, char **env, int i)
 		return err("error: cannot execute "), err(*argv), err("\n");
 	}
 	waitpid(pid, &status, 0);
-	if (has_pipe && (dup2(fd[0], 0)) == -1 && close(fd[0]) == -1 && close(fd[1] == -1))
+	if (has_pipe && (dup2(fd[0], 0)) == -1 || close(fd[0]) == -1 || close(fd[1] == -1))
 		return err("error: fatal\n");
 	return WIFEXITED(status) && WEXITSTATUS(status);
 }
