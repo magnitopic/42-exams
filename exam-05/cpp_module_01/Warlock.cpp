@@ -40,9 +40,9 @@ Warlock::Warlock(std::string name, std::string title)
 Warlock::~Warlock()
 {
 	std::cout << this->name << ": My job here is done!" << std::endl;
-	for (std::map<std::string, ASpell *>::iterator it = this->spellBook.begin; it != this->spellBook.end(); ++it)
+	for (std::map<std::string, ASpell *>::iterator it = this->SpellBook.begin(); it != this->SpellBook.end(); ++it)
 		delete it->second;
-	this->spellBook.clear();
+	this->SpellBook.clear();
 }
 
 void Warlock::introduce() const
