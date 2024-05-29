@@ -1,6 +1,7 @@
 #include "Warlock.hpp"
 
-Warlock::Warlock(){}
+
+Warlock::Warlock() {}
 
 Warlock::Warlock(Warlock const &ref)
 {
@@ -14,12 +15,17 @@ Warlock &Warlock::operator=(Warlock const &ref)
 	return *this;
 }
 
-std::string const &Warlock::getName() const
+Warlock::~Warlock()
+{
+	std::cout << this->name << ": My job here is done." << std::endl;
+}
+
+std::string Warlock::getName() const
 {
 	return this->name;
 }
 
-std::string const &Warlock::getTitle() const
+std::string Warlock::getTitle() const
 {
 	return this->title;
 }
@@ -33,13 +39,7 @@ Warlock::Warlock(std::string name, std::string title)
 {
 	this->name = name;
 	this->title = title;
-
 	std::cout << this->name << ": This looks like another boring day." << std::endl;
-}
-
-Warlock::~Warlock()
-{
-	std::cout << this->name << ": My job here is done!" << std::endl;
 }
 
 void Warlock::introduce() const

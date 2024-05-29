@@ -6,18 +6,17 @@ class ATarget;
 
 class ASpell
 {
-protected:
+private:
 	std::string name;
 	std::string effects;
-	ASpell();
 	ASpell(ASpell const &ref);
 	ASpell &operator=(ASpell const &ref);
-
 public:
+	virtual ~ASpell();
 	std::string getName() const;
 	std::string getEffects() const;
-	virtual ASpell *clone() const = 0;
 	ASpell(std::string name, std::string effects);
-	virtual ~ASpell();
+	virtual ASpell *clone() const = 0;
 	void launch(ATarget const &target);
 };
+

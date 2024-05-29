@@ -1,6 +1,5 @@
 #include "ATarget.hpp"
 
-ATarget::ATarget() {}
 
 ATarget::ATarget(ATarget const &ref)
 {
@@ -13,6 +12,8 @@ ATarget &ATarget::operator=(ATarget const &ref)
 	return *this;
 }
 
+ATarget::~ATarget() {}
+
 std::string ATarget::getType() const
 {
 	return this->type;
@@ -23,10 +24,8 @@ ATarget::ATarget(std::string type)
 	this->type = type;
 }
 
-ATarget::~ATarget() {}
-
-void ATarget::getHitBySpell(ASpell const &ref) const
+void ATarget::getHitBySpell(ASpell const &spell) const
 {
-	std::cout << this->type << " has been " << ref.getEffects() << "!" << std::endl;
+	std::cout << this->type << " has been " << spell.getEffects() << "!" << std::endl;
 }
 

@@ -1,6 +1,5 @@
 #include "ASpell.hpp"
 
-ASpell::ASpell() {}
 
 ASpell::ASpell(ASpell const &ref)
 {
@@ -13,6 +12,8 @@ ASpell &ASpell::operator=(ASpell const &ref)
 	this->effects = ref.effects;
 	return *this;
 }
+
+ASpell::~ASpell() {}
 
 std::string ASpell::getName() const
 {
@@ -29,8 +30,6 @@ ASpell::ASpell(std::string name, std::string effects)
 	this->name = name;
 	this->effects = effects;
 }
-
-ASpell::~ASpell() {}
 
 void ASpell::launch(ATarget const &target)
 {
