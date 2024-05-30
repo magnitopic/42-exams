@@ -49,8 +49,7 @@ void Warlock::introduce() const
 
 void Warlock::learnSpell(ASpell *spell)
 {
-	if (spell)
-		this->book.learnSpell(spell);
+	this->book.learnSpell(spell);
 }
 
 void Warlock::forgetSpell(std::string spellName)

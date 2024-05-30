@@ -6,7 +6,7 @@
 class SpellBook
 {
 private:
-	std::map<std::string, ASpell *> book;
+	std::map<std::string, ASpell *> knownSpells;
 	SpellBook(SpellBook const &ref);
 	SpellBook &operator=(SpellBook const &ref);
 public:

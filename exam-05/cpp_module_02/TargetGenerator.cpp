@@ -14,28 +14,26 @@ TargetGenerator &TargetGenerator::operator=(TargetGenerator const &ref)
 	return *this;
 }
 
-TargetGenerator::~TargetGenerator()
+TargetGenerator::~TargetGenerator() {}
+
+void TargetGenerator::learnTargetType(ATarget *target)
 {
+	if (target)
+			this->targets[target->getType()] = target;
 }
 
-void TargetGenerator::learnTargetType(ATarget *Target)
+void TargetGenerator::forgetTargetType(std::string const &targetName)
 {
-	if (Target)
-		this->targets[Target->getType()] = Target;
-}
-
-void TargetGenerator::forgetTargetType(std::string const &TargetType)
-{
-	std::map<std::string, ATarget *>::iterator it = this->targets.find(TargetType);
+	std::map<std::string, ATarget *>::iterator it = this->targets.find(targetName);
 	if (it != this->targets.end())
 		this->targets.erase(it);
 }
 
-ATarget *TargetGenerator::createTarget(std::string const &TargetType)
+ATarget *TargetGenerator::createTarget(std::string const &targetName)
 {
-	ATarget* tmp = NULL;
-	if (this->targets.find(TargetType) != this->targets.end())
-		tmp = this->targets[TargetType];
+	ATarget *tmp = NULL;
+	if (this->targets.find(targetName) != this->targets.end())
+		tmp = this->targets[targetName];
 	return tmp;
 }
 

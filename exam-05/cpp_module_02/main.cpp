@@ -7,7 +7,6 @@
 #include "SpellBook.hpp"
 #include "TargetGenerator.hpp"
 
-
 int main()
 {
   Warlock richard("Richard", "foo");

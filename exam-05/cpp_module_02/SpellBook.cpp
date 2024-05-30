@@ -10,38 +10,38 @@ SpellBook::SpellBook(SpellBook const &ref)
 
 SpellBook &SpellBook::operator=(SpellBook const &ref)
 {
-	this->book = ref.book;
+	this->knownSpells = ref.knownSpells;
 	return *this;
 }
 
 SpellBook::~SpellBook()
 {
-	for (std::map<std::string, ASpell *>::iterator it = this->book.begin(); it != this->book.end(); it++)
+	for (std::map<std::string, ASpell *>::iterator it = this->knownSpells.begin(); it != this->knownSpells.end(); it++)
 		delete it->second;
-	this->book.clear();
+	this->knownSpells.clear();
 }
 
 void SpellBook::learnSpell(ASpell *spell)
 {
 	if (spell)
-		this->book[spell->getName()] = spell->clone();
+			this->knownSpells[spell->getName()] = spell->clone();
 }
 
 void SpellBook::forgetSpell(std::string const &spellName)
 {
-	std::map<std::string, ASpell *>::iterator it = this->book.find(spellName);
-	if (it != this->book.end())
+	std::map<std::string, ASpell *>::iterator it = this->knownSpells.find(spellName);
+	if (it != this->knownSpells.end())
 	{
 		delete it->second;
-		this->book.erase(it);
+		this->knownSpells.erase(it);
 	}
 }
 
 ASpell *SpellBook::createSpell(std::string const &spellName)
 {
-	ASpell* tmp = NULL;
-	if (this->book.find(spellName) != this->book.end())
-		tmp = this->book[spellName];
+	ASpell *tmp = NULL;
+	if (this->knownSpells.find(spellName) != this->knownSpells.end())
+		tmp = this->knownSpells[spellName];
 	return tmp;
 }
 
