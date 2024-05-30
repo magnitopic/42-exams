@@ -1,13 +1,15 @@
+#pragma once
 #include <iostream>
 #include <map>
 #include "ASpell.hpp"
+#include "SpellBook.hpp"
 
 class Warlock
 {
 private:
 	std::string name;
 	std::string title;
-	std::map<std::string, ASpell *> knownSpells;
+	SpellBook book;
 	Warlock();
 	Warlock(Warlock const &ref);
 	Warlock &operator=(Warlock const &ref);

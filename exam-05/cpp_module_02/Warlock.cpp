@@ -18,9 +18,6 @@ Warlock &Warlock::operator=(Warlock const &ref)
 Warlock::~Warlock()
 {
 	std::cout << this->name << ": My job here is done." << std::endl;
-	for (std::map<std::string, ASpell *>::iterator it = this->knownSpells.begin(); it != this->knownSpells.end(); it++)
-		delete it->second;
-	this->knownSpells.clear();
 }
 
 std::string Warlock::getName() const
@@ -53,19 +50,17 @@ void Warlock::introduce() const
 void Warlock::learnSpell(ASpell *spell)
 {
 	if (spell)
-		if (this->knownSpells.find(spell->getName()) == this->knownSpells.end())
-			this->knownSpells[spell->getName()] = spell;
+		this->book.learnSpell(spell);
 }
 
 void Warlock::forgetSpell(std::string spellName)
 {
-	if (this->knownSpells.find(spellName) != this->knownSpells.end())
-		this->knownSpells.erase(this->knownSpells.find(spellName));
+	this->book.forgetSpell(spellName);
 }
 
 void Warlock::launchSpell(std::string spellName, ATarget &target)
 {
-	if (this->knownSpells.find(spellName) != this->knownSpells.end())
-		this->knownSpells[spellName]->launch(target);
+	if (this->book.createSpell(spellName))
+		this->book.createSpell(spellName)->launch(target);
 }
 
