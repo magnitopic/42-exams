@@ -54,8 +54,8 @@ int main(int argc, char **argv)
 	bzero(&serveraddr, sizeof(serveraddr));
 
 	serveraddr.sin_family = AF_INET;
-	serveraddr.sin_port = atoi(argv[1]);
-	serveraddr.sin_addr.s_addr = INADDR_ANY;
+	serveraddr.sin_port = htons(atoi(argv[1]));
+	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	if (bind(serverfd, (const struct sockaddr *)&serveraddr, sizeof(serveraddr)) == -1 || listen(serverfd, 100) == -1)
 		err(NULL);
