@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include <string.h>
-#include <sys/socket.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
 
 typedef struct s_client
 {
 	int id;
-	char msg[30000];
-} t_client;
+	char msg[300000];
+}	t_client;
 
 t_client clients[1024];
 fd_set write_set, read_set, current;
@@ -52,22 +52,23 @@ int main(int argc, char **argv)
 
 	serveraddr.sin_family = AF_INET;
 	serveraddr.sin_port = htons(atoi(argv[1]));
-	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	serveraddr.sin_addr.s_addr = htonl(2130706433);
 
 	if (bind(serverfd, (const struct sockaddr *)&serveraddr, sizeof(serveraddr)) == -1 || listen(serverfd, 100) == -1)
 		err(NULL);
+
 	while (1)
 	{
 		write_set = read_set = current;
 		if (select(maxfd + 1, &read_set, &write_set, 0, 0) == -1) continue;
-		
+
 		for (int fd = 0; fd <= maxfd; fd++)
 		{
 			if (FD_ISSET(fd, &read_set))
 			{
 				if (fd == serverfd)
 				{
-					int clientfd = accept(serverfd, (struct sockaddr*)&serveraddr, &len);
+					int clientfd = accept(serverfd, (struct sockaddr *)&serveraddr, &len);
 					if (clientfd == -1) continue;
 					if (clientfd > maxfd) maxfd = clientfd;
 					clients[clientfd].id = gid++;
@@ -84,7 +85,7 @@ int main(int argc, char **argv)
 						msg_all(fd);
 						FD_CLR(fd, &current);
 						close(fd);
-						bzero(clients[fd].msg, sizeof(clients[fd].msg));
+						bzero(clients[fd].msg, strlen(clients[fd].msg));
 					}
 					else
 					{
@@ -96,7 +97,7 @@ int main(int argc, char **argv)
 								clients[fd].msg[j] = '\0';
 								sprintf(send_buff, "client %d: %s\n", clients[fd].id, clients[fd].msg);
 								msg_all(fd);
-								bzero(clients[fd].msg, sizeof(clients[fd].msg));
+								bzero(clients[fd].msg, strlen(clients[fd].msg));
 								j = -1;
 							}
 						}
@@ -105,6 +106,7 @@ int main(int argc, char **argv)
 				break;
 			}
 		}
-	}	
-	return (0);
+	}
+	return 0;
 }
+
